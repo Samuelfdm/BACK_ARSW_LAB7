@@ -68,4 +68,9 @@ public class BlueprintsServices {
         }
         return filteredBlueprints;
     }
+
+    public void updateBlueprint(Blueprint blueprint) throws BlueprintPersistenceException{
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateBlueprint'");
+    }
 }

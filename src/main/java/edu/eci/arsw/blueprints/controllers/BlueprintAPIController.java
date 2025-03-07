@@ -87,5 +87,18 @@ public class BlueprintAPIController {
         
     }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<?> updateBlueprint(@RequestBody Blueprint blueprint)  {
+        try {
+            bpp.updateBlueprint(blueprint);
+            return new ResponseEntity<>(blueprint,HttpStatus.ACCEPTED);
+        } catch (BlueprintPersistenceException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("No se actualizo el plano",HttpStatus.NOT_FOUND);
+        }catch (Exception m){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }  
+    }
+
 }
 
