@@ -10,7 +10,7 @@ import edu.eci.arsw.blueprints.filter.BlueprintFilter;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
-import jakarta.persistence.Tuple;
+
 
 import java.util.Collection;
 import java.util.HashSet;
