@@ -92,7 +92,7 @@ public class BlueprintAPIController {
         try {
             bpp.updateBlueprint(blueprint);
             return new ResponseEntity<>(blueprint,HttpStatus.ACCEPTED);
-        } catch (BlueprintPersistenceException e) {
+        } catch (BlueprintNotFoundException e) {
             e.printStackTrace();
             return new ResponseEntity<>("No se actualizo el plano",HttpStatus.NOT_FOUND);
         }catch (Exception m){

@@ -85,5 +85,13 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         Collection<Blueprint> b = blueprints.values();
         return b;
     }
+
+    public void updateBlueprint(Blueprint blueprint) throws BlueprintNotFoundException{
+        Blueprint update = getBlueprint(blueprint.getAuthor(),blueprint.getName());
+        if(update == null){
+            throw new BlueprintNotFoundException("The blueprint not found " + bprintname);
+        }
+        update.setPoints(blueprint.getPoints);
+    }
     
 }

@@ -10,6 +10,8 @@ import edu.eci.arsw.blueprints.filter.BlueprintFilter;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
+import jakarta.persistence.Tuple;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -69,8 +71,7 @@ public class BlueprintsServices {
         return filteredBlueprints;
     }
 
-    public void updateBlueprint(Blueprint blueprint) throws BlueprintPersistenceException{
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBlueprint'");
+    public void updateBlueprint(Blueprint blueprint) throws BlueprintNotFoundException{
+       bpp.updateBlueprint(blueprint);
     }
 }
