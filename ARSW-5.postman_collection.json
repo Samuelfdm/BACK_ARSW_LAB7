@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "5ed13810-7cc0-44c9-a10e-3e8d49b5d2c1",
+		"name": "ARSW-5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38000046"
+	},
+	"item": [
+		{
+			"name": "AllBlueprints",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blueprints",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blueprints"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blueprints(author)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blueprints/Maria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blueprints",
+						"Maria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author/name_plano",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blueprints/Maria/plano1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blueprints",
+						"Maria",
+						"plano1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPlanoPepe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"pepe\",\r\n    \"points\": [\r\n        {\r\n            \"x\": 40,\r\n            \"y\": 149\r\n        },\r\n        {\r\n            \"x\": 85,\r\n            \"y\": 12\r\n        }\r\n    ],\r\n    \"name\": \"plano10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/blueprints",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blueprints"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Plano de pepe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blueprints/pepe/plano10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blueprints",
+						"pepe",
+						"plano10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePepe",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"pepe\",\r\n    \"points\": [\r\n        {\r\n            \"x\": 40,\r\n            \"y\": 179\r\n        },\r\n        {\r\n            \"x\": 85,\r\n            \"y\": 52\r\n        }\r\n    ],\r\n    \"name\": \"plano10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/blueprints",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blueprints"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

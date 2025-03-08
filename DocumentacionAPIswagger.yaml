@@ -1,0 +1,143 @@
+openapi: 3.0.1
+info:
+  title: "Blueprints API"
+  description: "API REST para la gestión de planos de una prestigiosa compañía de diseño."
+  version: "1.0.0"
+  contact:
+    name: "Escuela Colombiana de Ingeniería"
+servers:
+  - url: "http://localhost:8080/blueprints"
+    description: "Servidor local"
+paths:
+  /:
+    get:
+      summary: "Obtener todos los blueprints"
+      description: "Devuelve una colección de todos los planos almacenados."
+      responses:
+        "202":
+          description: "Lista de blueprints obtenida exitosamente"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Blueprint"
+        "404":
+          description: "No se encontraron los planos"
+    post:
+      summary: "Agregar un nuevo blueprint"
+      description: "Guarda un nuevo blueprint en el sistema."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Blueprint"
+      responses:
+        "201":
+          description: "Blueprint creado exitosamente"
+        "403":
+          description: "No se pudo guardar el plano"
+  /{author}:
+    get:
+      summary: "Obtener planos por autor"
+      description: "Devuelve todos los planos de un autor específico."
+      parameters:
+        - name: "author"
+          in: "path"
+          required: true
+          description: "Nombre del autor"
+          schema:
+            type: "string"
+      responses:
+        "202":
+          description: "Lista de planos obtenida exitosamente"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Blueprint"
+        "404":
+          description: "No se encontraron planos para el autor especificado"
+  /{author}/{name}:
+    get:
+      summary: "Obtener un blueprint específico"
+      description: "Devuelve un plano basado en el autor y el nombre del plano."
+      parameters:
+        - name: "author"
+          in: "path"
+          required: true
+          description: "Nombre del autor"
+          schema:
+            type: "string"
+        - name: "name"
+          in: "path"
+          required: true
+          description: "Nombre del plano"
+          schema:
+            type: "string"
+      responses:
+        "202":
+          description: "Blueprint encontrado"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Blueprint"
+        "404":
+          description: "No se encontró el plano"
+    put:
+      summary: "Actualizar un blueprint"
+      description: "Actualiza la información de un blueprint existente."
+      parameters:
+        - name: "author"
+          in: "path"
+          required: true
+          description: "Nombre del autor"
+          schema:
+            type: "string"
+        - name: "name"
+          in: "path"
+          required: true
+          description: "Nombre del plano"
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Blueprint"
+      responses:
+        "202":
+          description: "Blueprint actualizado exitosamente"
+        "404":
+          description: "No se pudo actualizar el plano"
+components:
+  schemas:
+    Blueprint:
+      type: "object"
+      properties:
+        author:
+          type: "string"
+          description: "Nombre del autor"
+        name:
+          type: "string"
+          description: "Nombre del plano"
+        points:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              x:
+                type: "integer"
+              y:
+                type: "integer"
+      example:
+        author: "Juan Perez"
+        name: "Plano1"
+        points:
+          - x: 10
+            y: 20
+          - x: 30
+            y: 40
