@@ -10,8 +10,6 @@ import edu.eci.arsw.blueprints.filter.BlueprintFilter;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
-
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -74,4 +72,9 @@ public class BlueprintsServices {
     public void updateBlueprint(Blueprint blueprint) throws BlueprintNotFoundException{
        bpp.updateBlueprint(blueprint);
     }
+
+    public void deleteBlueprint(String author, String name) throws BlueprintNotFoundException {
+        bpp.deleteBlueprint(author, name);
+    }
+
 }

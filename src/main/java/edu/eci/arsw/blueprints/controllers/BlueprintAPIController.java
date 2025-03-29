@@ -5,22 +5,11 @@
  */
 package edu.eci.arsw.blueprints.controllers;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import ch.qos.logback.classic.Logger;
+import org.springframework.web.bind.annotation.*;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
@@ -38,7 +27,6 @@ public class BlueprintAPIController {
     @Autowired
     BlueprintsServices bpp;
 
-
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> allBlueprints(){
         try{
@@ -48,7 +36,6 @@ public class BlueprintAPIController {
             return new ResponseEntity<>("No se encontro los planos",HttpStatus.NOT_FOUND);
         }
     }
-
 
     @GetMapping("/{author}")
     public ResponseEntity<?> getBlueprint(@PathVariable String author) {
@@ -103,6 +90,24 @@ public class BlueprintAPIController {
         }catch (Exception m){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }  
+    }
+
+    @DeleteMapping("/{author}/{name}")
+    public ResponseEntity<?> deleteBlueprint(@PathVariable String author, @PathVariable String name) {
+        try {
+            bpp.deleteBlueprint(author, name);
+            return new ResponseEntity<>(Map.of("message", "Blueprint deleted successfully"), HttpStatus.OK);
+        } catch (BlueprintNotFoundException e) {
+            return new ResponseEntity<>(
+                    Map.of("error", "Blueprint not found", "details", e.getMessage()),
+                    HttpStatus.NOT_FOUND
+            );
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    Map.of("error", "Internal server error", "details", e.getMessage()),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
 }

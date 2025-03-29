@@ -11,11 +11,8 @@ import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 import java.util.concurrent.ConcurrentHashMap;
-
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -26,7 +23,6 @@ import org.springframework.stereotype.Service;
  *
  * @author hcadavid
  */
-
 @Service
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
@@ -94,6 +90,14 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
             throw new BlueprintNotFoundException("The blueprint not found " + blueprint.getName()+ "of the author "+blueprint.getAuthor() );
         }
         update.setPoints(blueprint.getPoints());
+    }
+
+    public void deleteBlueprint(String author, String blueprintName) throws BlueprintNotFoundException {
+        Tuple<String, String> key = new Tuple<>(author, blueprintName);
+        if (!blueprints.containsKey(key)) {
+            throw new BlueprintNotFoundException("Blueprint not found: " + blueprintName + " for author: " + author);
+        }
+        blueprints.remove(key);
     }
     
 }
