@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.blueprints.controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -73,11 +74,15 @@ public class BlueprintAPIController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> postMethodName(@RequestBody Blueprint blueprint)  {
+    @PostMapping
+    public ResponseEntity<?> createBlueprint(@RequestBody Blueprint blueprint)  {
         try {
+            if (blueprint.getPoints() == null) {
+                blueprint.setPoints(new ArrayList<>());
+            }
+
             bpp.addNewBlueprint(blueprint);
-            return new ResponseEntity<>(blueprint,HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(blueprint, HttpStatus.CREATED);
         } catch (BlueprintPersistenceException e) {
             e.printStackTrace();
             return new ResponseEntity<>("No se guardo el plano",HttpStatus.NOT_FOUND);
